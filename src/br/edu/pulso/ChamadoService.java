@@ -23,6 +23,10 @@ public class ChamadoService {
         if (!status.isEmpty()) {
             resultado.removeIf(c -> !c.getStatus().equals(status));
         }
+        String setor = parametros.getOrDefault("setor", "");
+        if (!setor.isEmpty()) {
+            resultado.removeIf(c -> !c.getSetor().equals(setor));
+        }
         String ordem = parametros.getOrDefault("ordem", "");
         if (ordem.equals("prioridade")) {
             resultado.sort((a, b) -> Integer.compare(peso(b.getPrioridade()), peso(a.getPrioridade())));
