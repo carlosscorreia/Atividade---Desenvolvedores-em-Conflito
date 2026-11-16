@@ -23,7 +23,17 @@ public class ChamadoService {
         if (!status.isEmpty()) {
             resultado.removeIf(c -> !c.getStatus().equals(status));
         }
+        String ordem = parametros.getOrDefault("ordem", "");
+        if (ordem.equals("prioridade")) {
+            resultado.sort((a, b) -> Integer.compare(peso(b.getPrioridade()), peso(a.getPrioridade())));
+        }
         return resultado;
+    }
+
+    private int peso(String prioridade) {
+        if (prioridade.equals("Alta")) return 3;
+        if (prioridade.equals("Média")) return 2;
+        return 1;
     }
 
     public List<Chamado> todos() {
